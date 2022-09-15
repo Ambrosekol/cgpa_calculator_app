@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // routes: landingScreen(),
-      title: 'Flutter Demo',
+      title: 'CGPA CAlculator',
       theme: ThemeData(
         inputDecorationTheme: textFieldTheme,
         primarySwatch: Colors.blue,
