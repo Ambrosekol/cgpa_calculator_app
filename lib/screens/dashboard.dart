@@ -22,6 +22,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: navBar(),
       body: Column(
         children: [
           Container(
@@ -82,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
                   cgpaIsHidden ? demoCgpa : '****',
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 40,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Amaranth',
                   ),
@@ -120,9 +121,6 @@ class _DashboardState extends State<Dashboard> {
           // ),
           const SizedBox(height: 10.0),
           // const Chart(),
-          Lottie.asset(
-            'assets/35269-the-guy-with-the-cat-at-the-computer.json',
-          ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(10),
@@ -135,10 +133,15 @@ class _DashboardState extends State<Dashboard> {
   }
 
   List<Widget> yearListStatus() {
-    List<Widget> widgets = [];
-    for (int i = 0; i < widget.yearsInCollege; i++) {
-      widgets.add(YearCard(id: i));
+    List<Widget> widgets = [
+      Lottie.asset(
+        'assets/35269-the-guy-with-the-cat-at-the-computer.json',
+      )
+    ];
+    for (int i = 1; i < widget.yearsInCollege + 1; i++) {
+      widgets.add(YearCard(id: i - 1));
     }
+
     return widgets;
   }
 
@@ -181,6 +184,18 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       onTap: () {},
+    );
+  }
+
+  BottomNavigationBar navBar() {
+    List<BottomNavigationBarItem> baritem = const [
+      BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add New course'),
+      BottomNavigationBarItem(icon: Icon(Icons.share), label: 'Share'),
+      BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'Save')
+    ];
+    return BottomNavigationBar(
+      items: baritem,
+      backgroundColor: Colors.redAccent,
     );
   }
 }

@@ -22,7 +22,7 @@ class _YearCardState extends State<YearCard> {
         borderRadius: BorderRadius.circular(15),
         // color: Colors.redAccent,
         gradient: const LinearGradient(
-          stops: [0.5, 0.2],
+          stops: [0.6, 0.2],
           colors: [Colors.white, Colors.blue],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
