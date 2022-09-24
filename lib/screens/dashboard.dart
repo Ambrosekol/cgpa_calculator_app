@@ -1,4 +1,3 @@
-import 'package:cgpa_calculator_app/widget/chart.dart';
 import 'package:cgpa_calculator_app/widget/yearcard.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -78,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 6.0),
                 Text(
                   cgpaIsHidden ? demoCgpa : '****',
                   style: const TextStyle(
@@ -111,18 +110,19 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              actionButton(id: 1, icon: Icons.add, title: 'Add New'),
-              actionButton(id: 2, icon: Icons.cloud, title: 'Save'),
-              actionButton(id: 3, icon: Icons.share, title: 'Share'),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     actionButton(id: 1, icon: Icons.add, title: 'Add New'),
+          //     actionButton(id: 2, icon: Icons.cloud, title: 'Save'),
+          //     actionButton(id: 3, icon: Icons.share, title: 'Share'),
+          //   ],
+          // ),
           const SizedBox(height: 10.0),
-          const Chart(),
+          // const Chart(),
           Lottie.asset(
-              'assets/35269-the-guy-with-the-cat-at-the-computer.json'),
+            'assets/35269-the-guy-with-the-cat-at-the-computer.json',
+          ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(10),
@@ -170,12 +170,12 @@ class _DashboardState extends State<Dashboard> {
             Icon(
               icon,
               color: Colors.white,
-              size: 20,
+              size: 20.0,
             ),
             Text(
               title,
               style: const TextStyle(
-                  color: Colors.white, fontFamily: 'Amaranth', fontSize: 15),
+                  color: Colors.white, fontFamily: 'Amaranth', fontSize: 15.0),
             )
           ],
         ),

@@ -11,7 +11,7 @@ class YearConfirmation extends StatefulWidget {
 
 class _YearConfirmationState extends State<YearConfirmation>
     with TickerProviderStateMixin {
-  TextEditingController graduatingYearController = TextEditingController();
+  final graduatingYearController = TextEditingController();
   ColorTween colorChanger =
       ColorTween(begin: Colors.redAccent, end: Colors.white);
   late AnimationController _animationController;
@@ -84,8 +84,8 @@ class _YearConfirmationState extends State<YearConfirmation>
                   IconButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => Dashboard(
-                                int.parse(graduatingYearController.text))));
+                            builder: (context) => Dashboard(int.parse(
+                                graduatingYearController.text.trim()))));
                       },
                       icon: const Icon(
                         Icons.arrow_forward_sharp,
@@ -104,6 +104,7 @@ class _YearConfirmationState extends State<YearConfirmation>
   Widget getText() {
     return TextField(
       controller: graduatingYearController,
+      // onTap: () => print(graduatingYearController.text),
       cursorColor: Colors.white,
       textAlign: TextAlign.center,
       style: const TextStyle(
