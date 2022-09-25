@@ -210,7 +210,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget navItem(IconData icon, String label, {required id}) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         setState(() {
           bottomNavItemSelector = id;

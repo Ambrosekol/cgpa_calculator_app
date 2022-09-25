@@ -64,6 +64,7 @@ flutter:
     - assets/51367-spinner.json
     - assets/35269-the-guy-with-the-cat-at-the-computer.json
     - assets/dashboard_design.jpg
+    - assets/graphimage.png
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
