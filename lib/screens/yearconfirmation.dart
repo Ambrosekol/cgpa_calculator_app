@@ -24,7 +24,16 @@ class _YearConfirmationState extends State<YearConfirmation>
     animation =
         CurvedAnimation(parent: _animationController, curve: Curves.easeIn)
           ..addListener(() {
-            setState(() {});
+            setState(() {
+              // _animationController.forward();
+            });
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _animationController.reverse();
+            } else if (status == AnimationStatus.dismissed) {
+              _animationController.forward();
+            }
           });
 
     super.initState();
