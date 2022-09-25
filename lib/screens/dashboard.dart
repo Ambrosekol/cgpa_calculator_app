@@ -158,35 +158,36 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  Widget actionButton(
-      {required int id, required IconData icon, required String title}) {
-    return InkWell(
-      child: Container(
-        height: 50.0,
-        width: MediaQuery.of(context).size.width / 4,
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Icon(
-              icon,
-              color: Colors.white,
-              size: 20.0,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                  color: Colors.white, fontFamily: 'Amaranth', fontSize: 15.0),
-            )
-          ],
-        ),
-      ),
-      onTap: () {},
-    );
-  }
+  /// Code Enhanced to [BottomNavigation]
+  // Widget actionButton(
+  //     {required int id, required IconData icon, required String title}) {
+  //   return InkWell(
+  //     child: Container(
+  //       height: 50.0,
+  //       width: MediaQuery.of(context).size.width / 4,
+  //       decoration: BoxDecoration(
+  //         color: Colors.blue,
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: [
+  //           Icon(
+  //             icon,
+  //             color: Colors.white,
+  //             size: 20.0,
+  //           ),
+  //           Text(
+  //             title,
+  //             style: const TextStyle(
+  //                 color: Colors.white, fontFamily: 'Amaranth', fontSize: 15.0),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //     onTap: () {},
+  //   );
+  // }
 
   Widget bottomNavigation() {
     return Container(
