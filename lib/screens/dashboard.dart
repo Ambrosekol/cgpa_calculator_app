@@ -11,6 +11,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  int bottomNavItemSelector = 0;
   List<String> commentaryStatus = [
     'Excellence',
     'Good Academic Standing',
@@ -22,7 +23,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: navBar(),
+      bottomNavigationBar: bottomNavigation(),
       body: Column(
         children: [
           Container(
@@ -187,15 +188,76 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  BottomNavigationBar navBar() {
-    List<BottomNavigationBarItem> baritem = const [
-      BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add New course'),
-      BottomNavigationBarItem(icon: Icon(Icons.share), label: 'Share'),
-      BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'Save')
-    ];
-    return BottomNavigationBar(
-      items: baritem,
-      backgroundColor: Colors.redAccent,
+  Widget bottomNavigation() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: Colors.blue.withOpacity(0.9)),
+      child: Row(
+        children: [
+          navItem(Icons.add, 'Add New Entry', id: 1),
+          navItem(Icons.share, 'Share', id: 2),
+          navItem(Icons.save, 'Save', id: 3),
+        ],
+      ),
+    );
+  }
+
+  Widget navItem(IconData icon, String label, {required id}) {
+    // List<BottomNavigationBarItem> baritem = const [
+    //   BottomNavigationBarItem(
+    //     icon: Icon(Icons.add, color: Colors.white),
+    //     label: 'New entry',
+    //   ),
+    //   BottomNavigationBarItem(
+    //       icon: Icon(Icons.share, color: Colors.white), label: 'Share'),
+    //   BottomNavigationBarItem(
+    //       icon: Icon(Icons.cloud, color: Colors.white), label: 'Save')
+    // ];
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          bottomNavItemSelector = id;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3,
+        height: 60,
+        alignment: Alignment.center,
+        decoration: id == bottomNavItemSelector
+            ? const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                // border:
+                //     Border(bottom: BorderSide(width: 5, color: Colors.white)),
+                color: Colors.redAccent,
+                // gradient: LinearGradient(
+                //   colors: [
+                //     Colors.redAccent.withOpacity(0.8),
+                //     Colors.redAccent.withOpacity(0.1)
+                //   ],
+                //   begin: Alignment.bottomCenter,
+                //   end: Alignment.topCenter,
+                //   // stops: const [0.1, 0.2],
+                // ),
+              )
+            : null,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(icon, color: Colors.white),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

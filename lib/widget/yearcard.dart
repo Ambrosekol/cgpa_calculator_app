@@ -29,7 +29,7 @@ class _YearCardState extends State<YearCard> {
         ),
       ),
       width: MediaQuery.of(context).size.width - 20,
-      height: 150.0,
+      height: 160.0,
       child: Column(
         children: [
           Text(
