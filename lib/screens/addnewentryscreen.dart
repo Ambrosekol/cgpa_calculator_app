@@ -10,6 +10,6 @@ class NewEntryScreen extends StatefulWidget {
 class _NewEntryScreenState extends State<NewEntryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold();
   }
 }
