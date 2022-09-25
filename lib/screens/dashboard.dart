@@ -2,6 +2,8 @@ import 'package:cgpa_calculator_app/widget/yearcard.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'addnewentryscreen.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard(this.yearsInCollege, {Key? key}) : super(key: key);
   final int yearsInCollege;
@@ -208,21 +210,25 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget navItem(IconData icon, String label, {required id}) {
-    // List<BottomNavigationBarItem> baritem = const [
-    //   BottomNavigationBarItem(
-    //     icon: Icon(Icons.add, color: Colors.white),
-    //     label: 'New entry',
-    //   ),
-    //   BottomNavigationBarItem(
-    //       icon: Icon(Icons.share, color: Colors.white), label: 'Share'),
-    //   BottomNavigationBarItem(
-    //       icon: Icon(Icons.cloud, color: Colors.white), label: 'Save')
-    // ];
     return GestureDetector(
       onTap: () {
         setState(() {
           bottomNavItemSelector = id;
         });
+        switch (id) {
+          case 1:
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NewEntryScreen()));
+            break;
+          case 2:
+            print('hello');
+            break;
+          case 3:
+            print('hello 3');
+            break;
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 3,
