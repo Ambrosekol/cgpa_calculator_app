@@ -25,7 +25,38 @@ class _YearSummaryState extends State<YearSummary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        enableFeedback: true,
+        onPressed: () {
+          setState(() {
+            yearInfo[widget.id].firstSemsetergpa = double.parse(
+                (yearInfo[widget.id].totalPoints1 /
+                        yearInfo[widget.id].totalCourseUnits1)
+                    .toStringAsFixed(2));
+            yearInfo[widget.id].secondSemsetergpa = double.parse(
+                (yearInfo[widget.id].totalPoints2 /
+                        yearInfo[widget.id].totalCourseUnits2)
+                    .toStringAsFixed(2));
+
+            yearInfo[widget.id].cgpa = double.parse(
+                ((yearInfo[widget.id].firstSemsetergpa +
+                            yearInfo[widget.id].secondSemsetergpa) /
+                        2)
+                    .toStringAsFixed(2));
+
+            yearInfo[widget.id].totalCourseOffered1 =
+                yearInfo[widget.id].firstSemesterCourses.length;
+            yearInfo[widget.id].totalCourseOffered2 =
+                yearInfo[widget.id].secondSemesterCourses.length;
+          });
+        },
+        child: const Text(
+          'Refresh',
+          style: TextStyle(color: Colors.white, fontSize: 12.0),
+        ),
+      ),
       body: SafeArea(
+        bottom: false,
         child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -67,17 +98,17 @@ class _YearSummaryState extends State<YearSummary> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 90.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.redAccent,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Your total CGPA is:',
                     textAlign: TextAlign.end,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -137,7 +168,7 @@ class _YearSummaryState extends State<YearSummary> {
                 (semesterID == 1)
                     ? 'Total Course Offered: ${yearInfo[widget.id].totalCourseOffered1}'
                     : 'Total Course Offered: ${yearInfo[widget.id].totalCourseOffered2}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontFamily: 'Amaranth',
@@ -147,7 +178,7 @@ class _YearSummaryState extends State<YearSummary> {
                 (semesterID == 1)
                     ? 'GPA for 1st Semester: ${yearInfo[widget.id].firstSemsetergpa}'
                     : 'GPA for 2st Semester: ${yearInfo[widget.id].secondSemsetergpa}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontFamily: 'Amaranth',
@@ -162,7 +193,7 @@ class _YearSummaryState extends State<YearSummary> {
                 (semesterID == 1)
                     ? 'Total Course units: ${yearInfo[widget.id].totalCourseUnits1}'
                     : 'Total Course units: ${yearInfo[widget.id].totalCourseUnits2}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontFamily: 'Amaranth',
@@ -172,7 +203,7 @@ class _YearSummaryState extends State<YearSummary> {
                 (semesterID == 1)
                     ? 'Total Course points: ${yearInfo[widget.id].totalPoints1}'
                     : 'Total Course points: ${yearInfo[widget.id].totalPoints2}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontFamily: 'Amaranth',
@@ -199,7 +230,7 @@ class _YearSummaryState extends State<YearSummary> {
                         ),
                       ),
                       scrollable: true,
-                      content: inputfield(),
+                      content: inputfield(semesterID),
 
                       // Column(
                       //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -297,7 +328,7 @@ class _YearSummaryState extends State<YearSummary> {
     );
   }
 
-  Widget inputfield() {
+  Widget inputfield(int iD) {
     InputDecoration textfielddecoration = const InputDecoration(
       prefixIcon: Icon(
         Icons.book_online_rounded,
@@ -405,17 +436,65 @@ class _YearSummaryState extends State<YearSummary> {
               if (courseController.text.isNotEmpty &&
                   selectedItem.isNotEmpty &&
                   unitController.text.isNotEmpty) {
-                calculatedCoursePoints.add(Course(
-                        name: courseController.text,
-                        units: int.parse(unitController.text),
-                        grade: selectedItem)
-                    .calculateCourseData());
-                listOfOfferedCourses.add(
-                  Course(
-                      name: courseController.text,
-                      units: int.parse(unitController.text),
-                      grade: selectedItem),
-                );
+                if (iD == 1) {
+                  yearInfo[widget.id].calculatedCoursePoints1.add(Course(
+                          name: courseController.text,
+                          units: int.parse(unitController.text),
+                          grade: selectedItem)
+                      .calculateCourseData());
+                  yearInfo[widget.id].firstSemesterCourses.add(
+                        Course(
+                            name: courseController.text,
+                            units: int.parse(unitController.text),
+                            grade: selectedItem),
+                      );
+                  int pointHolder = 0;
+                  for (var i = 0;
+                      i < yearInfo[widget.id].calculatedCoursePoints1.length;
+                      i++) {
+                    pointHolder +=
+                        yearInfo[widget.id].calculatedCoursePoints1[i];
+                  }
+                  yearInfo[widget.id].totalPoints1 = pointHolder;
+
+                  int courseUunitHolder = 0;
+                  for (var i = 0;
+                      i < yearInfo[widget.id].firstSemesterCourses.length;
+                      i++) {
+                    courseUunitHolder +=
+                        yearInfo[widget.id].firstSemesterCourses[i].units;
+                  }
+                  yearInfo[widget.id].totalCourseUnits1 = courseUunitHolder;
+                } else {
+                  yearInfo[widget.id].calculatedCoursePoints2.add(Course(
+                          name: courseController.text,
+                          units: int.parse(unitController.text),
+                          grade: selectedItem)
+                      .calculateCourseData());
+                  yearInfo[widget.id].secondSemesterCourses.add(
+                        Course(
+                            name: courseController.text,
+                            units: int.parse(unitController.text),
+                            grade: selectedItem),
+                      );
+                  int pointHolder = 0;
+                  for (var i = 0;
+                      i < yearInfo[widget.id].calculatedCoursePoints2.length;
+                      i++) {
+                    pointHolder +=
+                        yearInfo[widget.id].calculatedCoursePoints2[i];
+                  }
+                  yearInfo[widget.id].totalPoints2 = pointHolder;
+
+                  int courseUunitHolder = 0;
+                  for (var i = 0;
+                      i < yearInfo[widget.id].secondSemesterCourses.length;
+                      i++) {
+                    courseUunitHolder +=
+                        yearInfo[widget.id].secondSemesterCourses[i].units;
+                  }
+                  yearInfo[widget.id].totalCourseUnits2 = courseUunitHolder;
+                }
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

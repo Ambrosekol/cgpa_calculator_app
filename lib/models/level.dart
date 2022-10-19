@@ -10,23 +10,10 @@ class TLvl {
   int totalCourseUnits2 = 0;
   int totalCourseOffered1 = 0;
   int totalCourseOffered2 = 0;
-  List<Course>? firstSemesterCourses;
-  List<Course>? secondSemesterCourses;
-}
-
-/////////////////////////////////////
-class Level {
-  List<Semester> semesters;
-  Level(this.semesters);
-}
-
-class Semester {
-  int? totalCourseUnits;
-  int? totalpoints;
-  int? totalcourseDone;
-  double? gpa;
-  List<Course> courses;
-  Semester({required this.courses});
+  List<Course> firstSemesterCourses = [];
+  List<Course> secondSemesterCourses = [];
+  List<int> calculatedCoursePoints1 = [];
+  List<int> calculatedCoursePoints2 = [];
 }
 
 class Course {
@@ -59,23 +46,23 @@ class Course {
 }
 
 //////////////////////////////
-List<Course> listOfOfferedCourses = [];
-List<int> calculatedCoursePoints = [];
+// List<Course> listOfOfferedCourses = [];
+// List<int> calculatedCoursePoints = [];
 
-/////////
+// /////////
 
-int getTotalCoursePoints() {
-  int holder = 0;
-  for (var i = 0; i < calculatedCoursePoints.length; i++) {
-    holder += calculatedCoursePoints[i];
-  }
-  return holder;
-}
+// int getTotalCoursePoints() {
+//   int holder = 0;
+//   for (var i = 0; i < calculatedCoursePoints.length; i++) {
+//     holder += calculatedCoursePoints[i];
+//   }
+//   return holder;
+// }
 
-int getTotalCourseunits() {
-  int holder = 0;
-  for (var i = 0; i < listOfOfferedCourses.length; i++) {
-    holder += listOfOfferedCourses[i].units;
-  }
-  return holder;
-}
+// int getTotalCourseunits() {
+//   int holder = 0;
+//   for (var i = 0; i < listOfOfferedCourses.length; i++) {
+//     holder += listOfOfferedCourses[i].units;
+//   }
+//   return holder;
+// }

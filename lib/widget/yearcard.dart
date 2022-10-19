@@ -20,8 +20,21 @@ class _YearCardState extends State<YearCard> {
   late int totalCourseUnit;
   late int totalCourseOffered;
   @override
-  void initState() {
-    super.initState();
+  // void initState() {
+  //   super.initState();
+  //   totalCourseOffered = yearInfo[widget.id].totalCourseOffered1 +
+  //       yearInfo[widget.id].totalCourseOffered2;
+  //   totalPoints =
+  //       yearInfo[widget.id].totalPoints1 + yearInfo[widget.id].totalPoints2;
+  //   totalCourseUnit = yearInfo[widget.id].totalCourseUnits1 +
+  //       yearInfo[widget.id].totalCourseUnits2;
+  //   cgpa = yearInfo[widget.id].cgpa;
+  //   firstSemesterGpa = yearInfo[widget.id].firstSemsetergpa;
+  //   secondSemesterGpa = yearInfo[widget.id].secondSemsetergpa;
+  // }
+
+  @override
+  Widget build(BuildContext context) {
     totalCourseOffered = yearInfo[widget.id].totalCourseOffered1 +
         yearInfo[widget.id].totalCourseOffered2;
     totalPoints =
@@ -31,10 +44,6 @@ class _YearCardState extends State<YearCard> {
     cgpa = yearInfo[widget.id].cgpa;
     firstSemesterGpa = yearInfo[widget.id].firstSemsetergpa;
     secondSemesterGpa = yearInfo[widget.id].secondSemsetergpa;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         //edit each level
@@ -53,7 +62,7 @@ class _YearCardState extends State<YearCard> {
           borderRadius: BorderRadius.circular(15),
           // color: Colors.redAccent,
           gradient: const LinearGradient(
-            stops: [0.6, 0.2],
+            stops: [0.5, 0.2],
             colors: [Colors.white, Colors.blue],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -84,26 +93,26 @@ class _YearCardState extends State<YearCard> {
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       'Level CGPA: $cgpa',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       '1st Semester GPA: $firstSemesterGpa',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       '2nd Semester GPA: $secondSemesterGpa',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
@@ -116,20 +125,20 @@ class _YearCardState extends State<YearCard> {
                   children: [
                     Text(
                       'Total Course units: $totalCourseUnit',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     Text(
                       'Total Course offered: $totalCourseOffered',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Amaranth'),
                     ),
-                    Image(
+                    const Image(
                       height: 90.0,
                       image: AssetImage('assets/graphimage.png'),
                       fit: BoxFit.fill,

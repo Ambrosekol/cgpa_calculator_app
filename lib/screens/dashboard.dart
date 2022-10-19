@@ -3,7 +3,7 @@ import 'package:cgpa_calculator_app/widget/yearcard.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'addnewentryscreen.dart';
+import '../unused screens/addnewentryscreen.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard(this.yearsInCollege, {Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
     for (var i = 0; i < yearInfo.length; i++) {
       holder += yearInfo[i].cgpa;
     }
-    return holder;
+    return double.parse((holder / yearInfo.length).toStringAsFixed(2));
   }
 
   @override
@@ -39,6 +39,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    demoCgpa = getTotalCgpa();
     return Scaffold(
       bottomNavigationBar: bottomNavigation(),
       body: Column(
@@ -207,19 +208,27 @@ class _DashboardState extends State<Dashboard> {
   // }
 
   Widget bottomNavigation() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+    return InkWell(
+      onTap: () => setState(() {}),
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+            color: Colors.red.withOpacity(0.9)),
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Fetch Data',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontFamily: 'Amaranth',
+            ),
           ),
-          color: Colors.blue.withOpacity(0.9)),
-      child: Row(
-        children: [
-          navItem(Icons.add, 'Add New Entry', id: 1),
-          navItem(Icons.share, 'Share', id: 2),
-          navItem(Icons.save, 'Save', id: 3),
-        ],
+        ),
       ),
     );
   }

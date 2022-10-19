@@ -60,7 +60,9 @@ class _CoursesPageState extends State<CoursesPage> {
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8.0),
-                  itemCount: listOfOfferedCourses.length,
+                  itemCount: (widget.semester == 1)
+                      ? yearInfo[widget.level].firstSemesterCourses.length
+                      : yearInfo[widget.level].secondSemesterCourses.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
@@ -77,12 +79,32 @@ class _CoursesPageState extends State<CoursesPage> {
                             // focusColor: Colors.white,
                             tileColor: Colors.white,
                             // style: ListTileStyle.drawer,
-                            leading: Text(listOfOfferedCourses[index].name),
+                            leading: Text((widget.semester == 1)
+                                ? yearInfo[widget.level]
+                                    .firstSemesterCourses[index]
+                                    .name
+                                : yearInfo[widget.level]
+                                    .secondSemesterCourses[index]
+                                    .name),
                             title: Text(
-                              listOfOfferedCourses[index].units.toString(),
+                              (widget.semester == 1)
+                                  ? yearInfo[widget.level]
+                                      .firstSemesterCourses[index]
+                                      .units
+                                      .toString()
+                                  : yearInfo[widget.level]
+                                      .secondSemesterCourses[index]
+                                      .units
+                                      .toString(),
                               textAlign: TextAlign.center,
                             ),
-                            trailing: Text(listOfOfferedCourses[index].grade),
+                            trailing: Text((widget.semester == 1)
+                                ? yearInfo[widget.level]
+                                    .firstSemesterCourses[index]
+                                    .grade
+                                : yearInfo[widget.level]
+                                    .secondSemesterCourses[index]
+                                    .grade),
                             // subtitle: Text(
                             //     '${listOfCourses[index].calculateCourseData().toInt()}'),
                           ),
