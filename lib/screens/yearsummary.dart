@@ -16,12 +16,18 @@ class _YearSummaryState extends State<YearSummary> {
   TextEditingController courseController = TextEditingController();
   TextEditingController gradeController = TextEditingController();
   TextEditingController unitController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +85,7 @@ class _YearSummaryState extends State<YearSummary> {
                     ),
                   ),
                   Text(
-                    '3.46',
+                    '${yearInfo[widget.id].cgpa}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -128,7 +134,9 @@ class _YearSummaryState extends State<YearSummary> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Course Offered: 30',
+                (semesterID == 1)
+                    ? 'Total Course Offered: ${yearInfo[widget.id].totalCourseOffered1}'
+                    : 'Total Course Offered: ${yearInfo[widget.id].totalCourseOffered2}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -136,7 +144,9 @@ class _YearSummaryState extends State<YearSummary> {
                 ),
               ),
               Text(
-                'GPA for first Semester: 3.50',
+                (semesterID == 1)
+                    ? 'GPA for 1st Semester: ${yearInfo[widget.id].firstSemsetergpa}'
+                    : 'GPA for 2st Semester: ${yearInfo[widget.id].secondSemsetergpa}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -149,7 +159,9 @@ class _YearSummaryState extends State<YearSummary> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Course units: 30',
+                (semesterID == 1)
+                    ? 'Total Course units: ${yearInfo[widget.id].totalCourseUnits1}'
+                    : 'Total Course units: ${yearInfo[widget.id].totalCourseUnits2}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -157,7 +169,9 @@ class _YearSummaryState extends State<YearSummary> {
                 ),
               ),
               Text(
-                'Total course Points: 3.50',
+                (semesterID == 1)
+                    ? 'Total Course points: ${yearInfo[widget.id].totalPoints1}'
+                    : 'Total Course points: ${yearInfo[widget.id].totalPoints2}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -171,42 +185,77 @@ class _YearSummaryState extends State<YearSummary> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  //
-                  showModalBottomSheet(
-                      constraints: BoxConstraints.tight(
-                          Size(MediaQuery.of(context).size.width, 250)),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      backgroundColor: const Color.fromARGB(255, 242, 241, 241),
+                      title: const Text(
+                        'Add a new course',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          fontFamily: 'Amaranth',
                         ),
                       ),
-                      backgroundColor: Colors.black87,
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  icon: const Icon(
-                                    Icons.cancel,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              inputfield(),
+                      scrollable: true,
+                      content: inputfield(),
 
-                              ///
-                              ///
-                              ///
-                            ],
-                          ),
-                        );
-                      });
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                      //     Align(
+                      //       alignment: Alignment.topRight,
+                      //       child: IconButton(
+                      //         onPressed: () => Navigator.pop(context),
+                      //         icon: const Icon(
+                      //           Icons.cancel,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     inputfield(),
+
+                      //     ///
+                      //     ///
+                      //     ///
+                      //   ],
+                      // ),
+                    ),
+                  );
+                  // //
+                  // showModalBottomSheet(
+                  //     constraints: BoxConstraints.loose(
+                  //         Size(MediaQuery.of(context).size.width, 500)),
+                  //     shape: const RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.only(
+                  //         topLeft: Radius.circular(10),
+                  //         topRight: Radius.circular(10),
+                  //       ),
+                  //     ),
+                  //     backgroundColor: Colors.black87,
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return ListView(
+                  //         children: [
+                  //           Align(
+                  //             alignment: Alignment.topRight,
+                  //             child: IconButton(
+                  //               onPressed: () => Navigator.pop(context),
+                  //               icon: const Icon(
+                  //                 Icons.cancel,
+                  //                 color: Colors.white,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           inputfield(),
+
+                  //           ///
+                  //           ///
+                  //           ///
+                  //         ],
+                  //       );
+                  //     });
 
                   //
                 },
@@ -249,75 +298,165 @@ class _YearSummaryState extends State<YearSummary> {
   }
 
   Widget inputfield() {
-    return Container(
-      decoration: const BoxDecoration(
-          color: Colors.yellow,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.1,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 5,
-            child: Column(children: [
-              const Text('Course code'),
-              TextField(controller: courseController)
-            ]),
-          ),
-          const SizedBox(width: 8.0),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 5,
-            child: Column(children: [
-              const Text('units'),
-              TextField(
-                  controller: unitController,
-                  keyboardType: TextInputType.number),
-            ]),
-          ),
-          const SizedBox(height: 8.0),
-          DropdownButton(
-            items: grades
-                .map((item) =>
-                    DropdownMenuItem<String>(value: item, child: Text(item)))
-                .toList(),
-            value: selectedItem,
-            onChanged: (item) {
-              selectedItem = item.toString();
-            },
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 5,
-            child: Align(
-              alignment: Alignment.center,
-              child: ElevatedButton(
-                  onPressed: () {
-                    if (courseController.text.isNotEmpty &&
-                        selectedItem.isNotEmpty &&
-                        unitController.text.isNotEmpty) {
-                      setState(() {
-                        calculatedCoursePoints.add(Course(
-                                name: courseController.text,
-                                units: int.parse(unitController.text),
-                                grade: selectedItem)
-                            .calculateCourseData());
-                        listOfOfferedCourses.add(
-                          Course(
-                              name: courseController.text,
-                              units: int.parse(unitController.text),
-                              grade: selectedItem),
-                        );
-                      });
-                    }
-                  },
-                  child: const Text('Submit')),
-            ),
-          )
-        ],
+    InputDecoration textfielddecoration = const InputDecoration(
+      prefixIcon: Icon(
+        Icons.book_online_rounded,
+        color: Colors.blue,
       ),
+      // prefixIconColor: Colors.white,
+      fillColor: Colors.white,
+      label: Text(
+        'Course Code',
+        style: TextStyle(color: Colors.blue),
+      ),
+      // border: OutlineInputBorder(
+      //   borderSide: BorderSide(color: Colors.redAccent),
+      // ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.redAccent),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.redAccent),
+      ),
+    );
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TextField(
+          controller: courseController,
+          style: const TextStyle(
+            color: Colors.blue,
+            fontFamily: 'Amaranth',
+            fontSize: 20.0,
+          ),
+          cursorColor: Colors.blue,
+          decoration: textfielddecoration,
+        ),
+        const SizedBox(height: 20.0),
+        TextField(
+          controller: unitController,
+          keyboardType: TextInputType.number,
+          style: const TextStyle(
+            color: Colors.blue,
+            fontFamily: 'Amaranth',
+            fontSize: 20.0,
+          ),
+          cursorColor: Colors.blue,
+          decoration: textfielddecoration.copyWith(
+            prefixIcon: const Icon(
+              Icons.school,
+              color: Colors.blue,
+            ),
+            label: const Text(
+              'Course unit',
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20.0),
+        Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.redAccent),
+              borderRadius: BorderRadius.circular(10.0)),
+          child: DropdownButton(
+            hint: const Text(
+              'Select your Grade',
+              style: TextStyle(
+                color: Colors.blue,
+                fontFamily: 'Amaranth',
+                fontSize: 18.0,
+              ),
+            ),
+            dropdownColor: Colors.white,
+            // underline: Divider(),
+            isExpanded: true,
+            alignment: Alignment.center,
+            focusColor: Colors.blue,
+            value: selectedItem,
+            onChanged: (newValue) {
+              setState(() {
+                selectedItem = newValue as String;
+              });
+            },
+            items: grades.map((valueItem) {
+              return DropdownMenuItem(
+                value: valueItem,
+                child: Center(
+                  child: Text(
+                    valueItem,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.blue,
+                        fontFamily: 'Amaranth',
+                        fontSize: 20.0),
+                    //
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 20.0),
+        ElevatedButton(
+            style: ButtonStyle(
+                fixedSize: MaterialStateProperty.resolveWith(
+                    (states) => const Size.fromWidth(300))),
+            onPressed: () {
+              if (courseController.text.isNotEmpty &&
+                  selectedItem.isNotEmpty &&
+                  unitController.text.isNotEmpty) {
+                calculatedCoursePoints.add(Course(
+                        name: courseController.text,
+                        units: int.parse(unitController.text),
+                        grade: selectedItem)
+                    .calculateCourseData());
+                listOfOfferedCourses.add(
+                  Course(
+                      name: courseController.text,
+                      units: int.parse(unitController.text),
+                      grade: selectedItem),
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text(
+                      'Entry Added Successfully',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Amaranth',
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.redAccent,
+                    content: Text(
+                      'Entry Error - Input all fields',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Amaranth',
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ),
+                );
+              }
+
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Submit',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Amaranth',
+                fontSize: 20.0,
+              ),
+            )),
+      ],
     );
   }
 }

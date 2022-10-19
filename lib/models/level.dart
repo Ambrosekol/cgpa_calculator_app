@@ -1,3 +1,20 @@
+List<TLvl> yearInfo = [];
+
+class TLvl {
+  double cgpa = 0.0;
+  double firstSemsetergpa = 0.0;
+  double secondSemsetergpa = 0.0;
+  int totalPoints1 = 0;
+  int totalPoints2 = 0;
+  int totalCourseUnits1 = 0;
+  int totalCourseUnits2 = 0;
+  int totalCourseOffered1 = 3;
+  int totalCourseOffered2 = 0;
+  List<Course>? firstSemesterCourses;
+  List<Course>? secondSemesterCourses;
+}
+
+/////////////////////////////////////
 class Level {
   List<Semester> semesters;
   Level(this.semesters);

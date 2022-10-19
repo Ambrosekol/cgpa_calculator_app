@@ -1,3 +1,4 @@
+import 'package:cgpa_calculator_app/models/level.dart';
 import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
@@ -92,6 +93,17 @@ class _YearConfirmationState extends State<YearConfirmation>
                   const SizedBox(height: 20),
                   IconButton(
                       onPressed: () {
+                        for (int i = 0;
+                            i < int.parse(graduatingYearController.text.trim());
+                            i++) {
+                          yearInfo.add(TLvl());
+                        }
+
+                        /////
+                        ///
+                        ///
+                        ///
+                        ///
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => Dashboard(int.parse(
                                 graduatingYearController.text.trim()))));

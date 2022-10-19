@@ -1,3 +1,4 @@
+import 'package:cgpa_calculator_app/models/level.dart';
 import 'package:cgpa_calculator_app/widget/yearcard.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -20,8 +21,22 @@ class _DashboardState extends State<Dashboard> {
     'Needs to Improve',
     'Bad Performance'
   ];
-  String demoCgpa = '3.46';
+  late double demoCgpa;
   bool cgpaIsHidden = false;
+  double getTotalCgpa() {
+    double holder = 0;
+    for (var i = 0; i < yearInfo.length; i++) {
+      holder += yearInfo[i].cgpa;
+    }
+    return holder;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    demoCgpa = getTotalCgpa();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +98,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 const SizedBox(height: 6.0),
                 Text(
-                  cgpaIsHidden ? demoCgpa : '****',
+                  cgpaIsHidden ? demoCgpa.toString() : '****',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -149,11 +164,11 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget getCommentary() {
-    if (double.parse(demoCgpa) > 4.0) {
+    if (demoCgpa > 4.0) {
       return Text(commentaryStatus[0]);
-    } else if (double.parse(demoCgpa) >= 3.0) {
+    } else if (demoCgpa >= 3.0) {
       return Text(commentaryStatus[1]);
-    } else if (double.parse(demoCgpa) >= 2.0) {
+    } else if (demoCgpa >= 2.0) {
       return Text(commentaryStatus[2]);
     } else {
       return Text(commentaryStatus[3]);

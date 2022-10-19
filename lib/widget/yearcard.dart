@@ -1,3 +1,4 @@
+import 'package:cgpa_calculator_app/models/level.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/yearsummary.dart';
@@ -12,6 +13,26 @@ class YearCard extends StatefulWidget {
 }
 
 class _YearCardState extends State<YearCard> {
+  late int totalPoints;
+  late double cgpa;
+  late double firstSemesterGpa;
+  late double secondSemesterGpa;
+  late int totalCourseUnit;
+  late int totalCourseOffered;
+  @override
+  void initState() {
+    super.initState();
+    totalCourseOffered = yearInfo[widget.id].totalCourseOffered1 +
+        yearInfo[widget.id].totalCourseOffered2;
+    totalPoints =
+        yearInfo[widget.id].totalPoints1 + yearInfo[widget.id].totalPoints2;
+    totalCourseUnit = yearInfo[widget.id].totalCourseUnits1 +
+        yearInfo[widget.id].totalCourseUnits2;
+    cgpa = yearInfo[widget.id].cgpa;
+    firstSemesterGpa = yearInfo[widget.id].firstSemsetergpa;
+    secondSemesterGpa = yearInfo[widget.id].secondSemsetergpa;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -55,9 +76,17 @@ class _YearCardState extends State<YearCard> {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text(
-                      'Total points: 100',
+                      'Total points: $totalPoints',
+                      style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Amaranth'),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Level CGPA: $cgpa',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -65,7 +94,7 @@ class _YearCardState extends State<YearCard> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Level CGPA: 4.32',
+                      '1st Semester GPA: $firstSemesterGpa',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -73,15 +102,7 @@ class _YearCardState extends State<YearCard> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      '1st Semester GPA: 4.32',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Amaranth'),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      '2nd Semester GPA: 4.32',
+                      '2nd Semester GPA: $secondSemesterGpa',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -92,9 +113,9 @@ class _YearCardState extends State<YearCard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text(
-                      'Total Course units: 20',
+                      'Total Course units: $totalCourseUnit',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -102,7 +123,7 @@ class _YearCardState extends State<YearCard> {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      'Total Course offered: 30',
+                      'Total Course offered: $totalCourseOffered',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
