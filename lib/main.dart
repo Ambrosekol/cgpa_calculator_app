@@ -1,3 +1,4 @@
+import 'package:cgpa_calculator_app/screens/dashboard.dart';
 import 'package:cgpa_calculator_app/screens/welcomescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // routes: landingScreen(),
       title: 'CGPA CAlculator',
       theme: ThemeData(
         inputDecorationTheme: textFieldTheme,
