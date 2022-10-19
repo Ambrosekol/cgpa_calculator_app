@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/yearsummary.dart';
+
 class YearCard extends StatefulWidget {
   const YearCard({Key? key, required this.id}) : super(key: key);
 
@@ -15,6 +17,11 @@ class _YearCardState extends State<YearCard> {
     return GestureDetector(
       onTap: () {
         //edit each level
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => YearSummary(id: widget.id)));
       },
       child: Container(
         margin: (widget.id == 0)
