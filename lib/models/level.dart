@@ -8,7 +8,7 @@ class TLvl {
   int totalPoints2 = 0;
   int totalCourseUnits1 = 0;
   int totalCourseUnits2 = 0;
-  int totalCourseOffered1 = 3;
+  int totalCourseOffered1 = 0;
   int totalCourseOffered2 = 0;
   List<Course>? firstSemesterCourses;
   List<Course>? secondSemesterCourses;
